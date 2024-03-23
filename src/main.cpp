@@ -39,7 +39,7 @@ void showScreen2(){
   texts.emplace_back("Weelkly: -1.65%");
   screen->fullBoxedInfoScreen("SnP 500", texts, 5, 5, SH110X_WHITE); 
 }
-
+  
 boolean canDebounceRead(){
   unsigned long curr = millis();
   if(curr > lastDebounceRead + DEBOUNCE_DELAY){
