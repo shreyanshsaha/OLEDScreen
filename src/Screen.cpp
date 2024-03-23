@@ -34,7 +34,7 @@ void Screen::fullBoxedInfoScreen(std::string heading, std::string text, int16_t 
 void Screen::fullBoxedInfoScreen(std::string heading, std::vector<std::string> texts, int16_t text_x, int16_t text_y, uint16_t color)
 {
     OLEDText::TextConfig headingConfig = this->text->config;
-    headingConfig.textSize++;
+    headingConfig.textSize=2;
 
     this->shape->drawRect(0, 0, this->shape->w, this->shape->h, color);
     this->shape->show();
@@ -60,8 +60,10 @@ void Screen::infoScreenText(std::string heading, std::vector<std::string> texts,
 {
     int16_t yPos = text_y;
     this->text->printText(heading, text_x, yPos, headingConfig);
-    yPos+=20;
-    for(std::string text: texts){
+
+    yPos+=17;
+    for(int i=0; i<texts.size(); i++){
+        std::string text = texts[i];
         this->text->printText(text.c_str(), text_x, yPos);
         yPos+=10;
     }
