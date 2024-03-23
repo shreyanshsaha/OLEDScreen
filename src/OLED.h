@@ -5,6 +5,7 @@
 #include <Adafruit_GFX.h>
 #include <Wire.h>
 #include <SPI.h>
+#include <string>
 
 
 #define i2c_Address 0x3c //initialize with the I2C addr 0x3C Typically eBay OLED's

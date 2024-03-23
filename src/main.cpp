@@ -2,6 +2,8 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
+#include <vector>
+#include <string>
 
 #include "Screen.h"
 
@@ -27,8 +29,12 @@ void setup()   {
 
 
 void loop() {
+  std::vector<std::string> texts;
+  texts.emplace_back("Hello World 1");
+  texts.emplace_back("Hello World 2");
+  texts.emplace_back("Hello World 3");
   screen->clear();
-  screen->fullBoxedInfoScreen("Heading", "Hello World 2", 10, 10, SH110X_WHITE);
+  screen->fullBoxedInfoScreen("Heading", texts, 10, 10, SH110X_WHITE);
   delay(2000);
 }
 
