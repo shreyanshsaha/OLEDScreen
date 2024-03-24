@@ -13,11 +13,11 @@ OLEDText::OLEDText(Adafruit_SH1106G* display, TextConfig config): OLEDText(displ
 	this->config = config;
 }
 
-void OLEDText::printText(std::string text, int16_t x, int16_t y){
+void OLEDText::printText(String text, int16_t x, int16_t y){
 	printText(text, x, y, this->config);
 }
 
-void OLEDText::printText(std::string text, int16_t x, int16_t y, TextConfig config){
+void OLEDText::printText(String text, int16_t x, int16_t y, TextConfig config){
 	display->setTextSize(config.textSize);
 	display->setTextColor(config.textColor);
 	display->setCursor(x, y);
@@ -25,7 +25,7 @@ void OLEDText::printText(std::string text, int16_t x, int16_t y, TextConfig conf
 	display->println(text.c_str());
 }
 
-void OLEDText::printText(std::string text){
+void OLEDText::printText(String text){
 	display->setTextSize(config.textSize);
 	display->setTextColor(config.textColor);
 	display->setTextColor(config.textColor, config.bgColor);

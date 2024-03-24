@@ -2,8 +2,6 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
-#include <vector>
-#include <string>
 
 #include "Screen.h"
 
@@ -16,58 +14,31 @@ Screen *screen;
 
 Adafruit_SH1106G* display;
 
-std::vector<void (*)()> screens;
+// function pointers
+void (*screens[2])();
 int screenIdx = 0;
 
-volatile unsigned long lastDebounceRead = 0;
-const unsigned long DEBOUNCE_DELAY=500;
+
 
 void showScreen1(){
-  std::vector<std::string> texts;
-  texts.emplace_back("Price: 13245.34");
-  texts.emplace_back("O:12300  C:24579");
-  texts.emplace_back("Daily: -5.42%");
-  texts.emplace_back("Weelkly: -10.34%");
-  screen->fullBoxedInfoScreen("NIFTY 50", texts, 5, 5, SH110X_WHITE); 
+  String texts[4];
+  texts[0] = "Price: 13245.34";
+  texts[1] = "O:12300  C:24579";
+  texts[2] = "Daily: -5.42%";
+  texts[3] = "Weekly: -10.34%";
+
+  screen->fullBoxedInfoScreen("NIFTY 50", texts, 4, 5, 5, SH110X_WHITE); 
 }
 
 void showScreen2(){
-  std::vector<std::string> texts;
-  texts.emplace_back("Price: 4262.34");
-  texts.emplace_back("O:6356  C:2565");
-  texts.emplace_back("Daily: -6.13%");
-  texts.emplace_back("Weelkly: -1.65%");
-  screen->fullBoxedInfoScreen("SnP 500", texts, 5, 5, SH110X_WHITE); 
-}
-  
-boolean canDebounceRead(){
-  unsigned long curr = millis();
-  if(curr > lastDebounceRead + DEBOUNCE_DELAY){
-    lastDebounceRead = millis();
-    return true;
-  }
-  return false;
-}
+  String texts[4];
+  texts[1] = "Price: 4262.34";
+  texts[2] = "O:6356  C:2565";
+  texts[3] = "Daily: -6.13%";
+  texts[4] = "Weelkly: -1.65%";
 
-void nextScreen(){
-  if(!canDebounceRead()) return;
-  Serial.println("Switching to next screen");
-  screenIdx = (screenIdx + 1)%screens.size();
-  screen->clear();
+  screen->fullBoxedInfoScreen("SnP 500", texts, 4, 5, 5, SH110X_WHITE); 
 }
-
-void prevScreen(){
-  if(!canDebounceRead()) return;
-  Serial.println("Switching to prev screen");
-  if(screenIdx == 0){
-    screenIdx = screens.size()-1;
-  }
-  else{
-    screenIdx--;
-  }
-  screen->clear();
-}
-
 
 void setup()   {
   Serial.begin(9600);
@@ -84,11 +55,10 @@ void setup()   {
 
   delay(250); // wait for the OLED to power up
   screen->clear();
-  screens.emplace_back(showScreen1);
-  screens.emplace_back(showScreen2);
+  screens[0] = showScreen1;
+  screens[1] = showScreen2;
 
-  attachInterrupt(digitalPinToInterrupt(NEXT_SCREEN_PIN), nextScreen, HIGH);
-  attachInterrupt(digitalPinToInterrupt(PREV_SCREEN_PIN), prevScreen, HIGH);
+
 
   screens[screenIdx]();
 }

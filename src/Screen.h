@@ -3,8 +3,6 @@
 
 #include "OLEDShape.h"
 #include "OLEDText.h"
-#include <vector>
-#include<string>
 
 class Screen
 {
@@ -17,13 +15,13 @@ public:
 
     Screen(Adafruit_SH1106G*);
 
-    void boxedScreenText(std::string string, int16_t text_x, int16_t text_y, int64_t rect_x, int16_t rect_y, int16_t rect_w, int16_t rect_h, uint16_t color);
-    void fullBoxedScreenText(std::string string, int16_t text_x, int16_t text_y, uint16_t color);
-    void fullBoxedInfoScreen(std::string heading, std::string text, int16_t text_x, int16_t text_y, uint16_t color);
-    void fullBoxedInfoScreen(std::string heading, std::vector<std::string> texts, int16_t text_x, int16_t text_y, uint16_t color);
-    void screenText(std::string string, int16_t text_x, int16_t text_y);
-    void infoScreenText(std::string heading, std::string text, int16_t text_x, int16_t text_y, OLEDText::TextConfig headingConfig);
-    void infoScreenText(std::string heading, std::vector<std::string> text, int16_t text_x, int16_t text_y, OLEDText::TextConfig headingConfig);
+    void boxedScreenText(String string, int16_t text_x, int16_t text_y, int64_t rect_x, int16_t rect_y, int16_t rect_w, int16_t rect_h, uint16_t color);
+    void fullBoxedScreenText(String string, int16_t text_x, int16_t text_y, uint16_t color);
+    void fullBoxedInfoScreen(String heading, String text, int16_t text_x, int16_t text_y, uint16_t color);
+    void fullBoxedInfoScreen(String heading, String texts[], size_t  n, int16_t text_x, int16_t text_y, uint16_t color);
+    void screenText(String string, int16_t text_x, int16_t text_y);
+    void infoScreenText(String heading, String text, int16_t text_x, int16_t text_y, OLEDText::TextConfig headingConfig);
+    void infoScreenText(String heading, String texts[], size_t  n, int16_t text_x, int16_t text_y, OLEDText::TextConfig headingConfig);
     void clear();
 
     ~Screen();

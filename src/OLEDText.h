@@ -19,9 +19,9 @@ public:
     OLEDText(Adafruit_SH1106G*, uint16_t, uint16_t, TextConfig);
     OLEDText(Adafruit_SH1106G*, TextConfig);
 
-    void printText(std::string, int16_t, int16_t);
-    void printText(std::string, int16_t, int16_t, TextConfig);
-    void printText(std::string);
+    void printText(String, int16_t, int16_t);
+    void printText(String, int16_t, int16_t, TextConfig);
+    void printText(String);
 };
 
 #endif
